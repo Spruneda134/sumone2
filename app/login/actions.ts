@@ -20,8 +20,9 @@ export async function login(formData: FormData) {
   if (error) {
     redirect('/error')
   }
-
-  revalidatePath('/', 'layout')
+  // revalidate the root path so server components (like the layout/header)
+  // pick up the updated session/cookies
+  revalidatePath('/')
   redirect('/')
 }
 
@@ -40,7 +41,8 @@ export async function signup(formData: FormData) {
   if (error) {
     redirect('/error')
   }
-
-  revalidatePath('/', 'layout')
+  // revalidate the root path so server components (like the layout/header)
+  // pick up the updated session/cookies
+  revalidatePath('/')
   redirect('/')
 }
