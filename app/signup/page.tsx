@@ -1,11 +1,12 @@
 
-import { LoginForm } from '@/components/login-form'
+import { SignupForm } from '@/components/signup-form'
 
-export default function LoginPage() {
+export default function SignupPage() {
   return (
     <div>
+
     <div className="w-md mx-auto mt-8 min-h-screen flex items-center">
-          <LoginForm />
+          <SignupForm />
     </div>
     </div>
   )

@@ -14,12 +14,14 @@ export default async function Header() {
 
   return (
     <div>
-      <h1>SumOne2</h1>
+
 
       {!session ? (
-        <a href="/login">Login</a>
+        <div>
+        </div>
       ) : (
         <div>
+                <h1>SumOne2</h1>
           {nav.map((item, index) => (
             <a key={index} href={item.link}>
               {item.text}

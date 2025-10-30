@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { login } from "@/app/login/actions"
+import { verifySecretKey } from "@/app/login/actions"
 import {
   Card,
   CardContent,
@@ -17,7 +17,8 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 
-export function LoginForm({
+
+export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -27,7 +28,7 @@ export function LoginForm({
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Welcome back</CardTitle>
           <CardDescription>
-            Login with your Email or Google account
+            Login with your Email
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -46,19 +47,23 @@ export function LoginForm({
               <Field>
                 <div className="flex items-center">
                   <FieldLabel htmlFor="password">Password</FieldLabel>
-                  <a
-                    href="#"
-                    className="ml-auto text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </a>
                 </div>
                 <Input id="password" name="password" type="password" required />
               </Field>
+    <Field>
+      <FieldLabel htmlFor="secretKey">Secret Key</FieldLabel>
+      <Input
+        id="secretKey"
+        name="secretKey"
+        type="text"
+        placeholder="Enter your secret key"
+        required
+      />
+    </Field>
               <Field>
-                <Button type="submit" formAction={login}>Login</Button>
+                <Button type="submit" formAction={verifySecretKey}>Sign Up</Button>
                 <FieldDescription className="text-center">
-                  Don&apos;t have an account? <a href="/signup">Sign up</a>
+                  Already have an account? <a href="/login">Log In</a>
                 </FieldDescription>
               </Field>
             </FieldGroup>

@@ -46,3 +46,15 @@ export async function signup(formData: FormData) {
   revalidatePath('/')
   redirect('/')
 }
+
+export async function verifySecretKey(formData: FormData) {
+  const secretKey = formData.get('secretKey') as string
+  const validKey = process.env.SIGNUP_SECRET_KEY
+
+  if (secretKey !== validKey) {
+    redirect('/error?reason=invalid-key')
+  }
+
+  // Key is valid — call signup
+  return signup(formData)
+}
