@@ -13,7 +13,7 @@ export default async function Header() {
   ];
 
   return (
-    <div>
+    <div className="bg-red-50">
 
 
       {!session ? (
