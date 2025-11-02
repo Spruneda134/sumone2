@@ -10,6 +10,7 @@ export default async function Header() {
     { text: "Home", link: "/" },
     { text: "Question", link: "/question" },
     { text: "History", link: "/history" },
+    { text: "Profile", link: "/profile" },
   ];
 
   return (
