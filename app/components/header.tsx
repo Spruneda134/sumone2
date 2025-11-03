@@ -11,6 +11,7 @@ export default async function Header() {
     { text: "Question", link: "/question" },
     { text: "History", link: "/history" },
     { text: "Profile", link: "/profile" },
+    { text: "Users", link: "/users" },
   ];
 
   return (
