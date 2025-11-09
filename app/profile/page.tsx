@@ -4,9 +4,7 @@ import EditProfileForm from './EditProfileForm'
 export default async function ProfilePage() {
   const supabase = await createClient()
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const { data: { user }, } = await supabase.auth.getUser()
 
   if (!user) return <p>Please sign in to view your profile.</p>
 
