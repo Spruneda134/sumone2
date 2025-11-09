@@ -9,9 +9,9 @@ export default async function Header() {
   const nav = [
     { text: "Home", link: "/" },
     { text: "Question", link: "/question" },
-    { text: "History", link: "/history" },
     { text: "Profile", link: "/profile" },
     { text: "Users", link: "/users" },
+    { text: "Posts", link: "/posts" },
   ];
 
   return (
