@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "SumOne2",
-  description: "SumOne2, built and designed by Salvador Pruneda.",
+  description: "SumOne2, designed and developed by Salvador Pruneda.",
   icons: {
     icon: "/favicon.png",
   },
