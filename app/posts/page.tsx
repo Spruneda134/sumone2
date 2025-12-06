@@ -131,7 +131,7 @@ export default function PostsPage() {
                 <p>{p.content}</p>
                 <p>
                   Posted By:{' '}
-                  {p.profile?.display_name || 'Anonymous'}
+                  {p.profile?.[0]?.display_name || 'Anonymous'}
                 </p>
 
                 {/* COMMENT COUNT DISPLAY */}

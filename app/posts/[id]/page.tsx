@@ -132,7 +132,7 @@ export default function SinglePostPage() {
 
         <p>
           <strong>Posted By:</strong>{' '}
-          {post.profile?.display_name || 'Anonymous'}
+          {post.profile?.[0]?.display_name || 'Anonymous'}
         </p>
 
         <small>{new Date(post.created_at).toLocaleString()}</small>
@@ -157,7 +157,7 @@ export default function SinglePostPage() {
             }}
           >
             <p>{c.content}</p>
-            <strong>{c.profile?.display_name || "Unknown User"}</strong>
+            <strong>{c.profile?.[0]?.display_name || "Unknown User"}</strong>
             <br />
             <small>{new Date(c.created_at).toLocaleString()}</small>
           </div>
