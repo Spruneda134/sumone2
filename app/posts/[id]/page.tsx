@@ -4,13 +4,14 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { createClient } from '../../utils/client'
 import Link from 'next/link'
+import type { Post, Comment } from '../types'
 
 export default function SinglePostPage() {
   const supabase = createClient()
   const { id } = useParams()
 
-  const [post, setPost] = useState<any>(null)
-  const [comments, setComments] = useState<any[]>([])
+  const [post, setPost] = useState<Post | null>(null)
+  const [comments, setComments] = useState<Comment[]>([])
   const [newComment, setNewComment] = useState("")
   const [loading, setLoading] = useState(false)
 
@@ -131,7 +132,7 @@ export default function SinglePostPage() {
 
         <p>
           <strong>Posted By:</strong>{' '}
-          {post.profile?.display_name || 'Anonymous'}
+          {post.profile?.[0]?.display_name || 'Anonymous'}
         </p>
 
         <small>{new Date(post.created_at).toLocaleString()}</small>
@@ -156,7 +157,7 @@ export default function SinglePostPage() {
             }}
           >
             <p>{c.content}</p>
-            <strong>{c.profile?.display_name || "Unknown User"}</strong>
+            <strong>{c.profile?.[0]?.display_name || "Unknown User"}</strong>
             <br />
             <small>{new Date(c.created_at).toLocaleString()}</small>
           </div>

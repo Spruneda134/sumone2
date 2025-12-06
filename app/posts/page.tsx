@@ -3,12 +3,16 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '../utils/client'
 import Link from 'next/link'
+import { generatePostWithAI } from './actions'
+import type { Post, AuthUser } from './types'
 
 export default function PostsPage() {
   const supabase = createClient()
-  const [user, setUser] = useState<any>(null)
-  const [posts, setPosts] = useState<any[]>([])
+  const [user, setUser] = useState<AuthUser>(null)
+  const [posts, setPosts] = useState<Post[]>([])
   const [content, setContent] = useState('')
+  const [isGenerating, setIsGenerating] = useState(false)
+  const [generatingError, setGeneratingError] = useState('')
 
   // Fetch user + posts (with comment count)
   useEffect(() => {
@@ -57,6 +61,32 @@ export default function PostsPage() {
     setContent('')
   }
 
+  // Generate post with AI
+  const handleGenerateWithAI = async () => {
+    setIsGenerating(true)
+    setGeneratingError('')
+
+    try {
+      const result = await generatePostWithAI()
+
+      if (result.success && result.post) {
+        // Add the new AI-generated post to the list
+        setPosts((prev) => [
+          { ...result.post, comments: [{ count: 0 }] },
+          ...prev,
+        ])
+      } else {
+        setGeneratingError(result.error || 'Failed to generate post')
+      }
+    } catch (error) {
+      setGeneratingError(
+        error instanceof Error ? error.message : 'Unknown error'
+      )
+    } finally {
+      setIsGenerating(false)
+    }
+  }
+
   return (
     <div style={{ padding: 20 }}>
       <h1>Posts</h1>
@@ -71,6 +101,19 @@ export default function PostsPage() {
       <button onClick={addPost} disabled={!user}>
         Add Post
       </button>
+      <button
+        onClick={handleGenerateWithAI}
+        disabled={!user || isGenerating}
+        style={{ marginLeft: 10 }}
+      >
+        {isGenerating ? 'Generating...' : 'Generate with AI'}
+      </button>
+
+      {generatingError && (
+        <p style={{ color: 'red', marginTop: 10 }}>
+          Error: {generatingError}
+        </p>
+      )}
 
       <div style={{ marginTop: 20 }}>
         {posts.length === 0 ? (
@@ -88,7 +131,7 @@ export default function PostsPage() {
                 <p>{p.content}</p>
                 <p>
                   Posted By:{' '}
-                  {p.profile?.display_name || 'Anonymous'}
+                  {p.profile?.[0]?.display_name || 'Anonymous'}
                 </p>
 
                 {/* COMMENT COUNT DISPLAY */}

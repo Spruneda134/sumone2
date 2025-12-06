@@ -2,11 +2,12 @@
 
 import { useState } from 'react'
 import { createClient } from '../utils/client'
+import type { Profile } from '../posts/types'
 
-export default function EditProfileForm({ profile }: { profile: any }) {
+export default function EditProfileForm({ profile }: { profile: Profile }) {
   const supabase = createClient()
-  const [displayName, setDisplayName] = useState(profile.display_name)
-  const [image, setImage] = useState(profile.image)
+  const [displayName, setDisplayName] = useState(profile.display_name || '')
+  const [image, setImage] = useState(profile.image || '')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
 
