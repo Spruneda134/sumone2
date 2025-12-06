@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react'
 import { createClient } from '../utils/client'
 import Link from 'next/link'
 import { generatePostWithAI } from './actions'
+import type { Post, AuthUser } from './types'
 
 export default function PostsPage() {
   const supabase = createClient()
-  const [user, setUser] = useState<any>(null)
-  const [posts, setPosts] = useState<any[]>([])
+  const [user, setUser] = useState<AuthUser>(null)
+  const [posts, setPosts] = useState<Post[]>([])
   const [content, setContent] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
   const [generatingError, setGeneratingError] = useState('')

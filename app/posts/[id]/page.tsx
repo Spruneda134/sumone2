@@ -4,13 +4,14 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { createClient } from '../../utils/client'
 import Link from 'next/link'
+import type { Post, Comment } from '../types'
 
 export default function SinglePostPage() {
   const supabase = createClient()
   const { id } = useParams()
 
-  const [post, setPost] = useState<any>(null)
-  const [comments, setComments] = useState<any[]>([])
+  const [post, setPost] = useState<Post | null>(null)
+  const [comments, setComments] = useState<Comment[]>([])
   const [newComment, setNewComment] = useState("")
   const [loading, setLoading] = useState(false)
 
